@@ -1,0 +1,59 @@
+@startuml
+
+!define Table(name,desc) class name as "desc" << (T,LightBlue) >>
+!define Dimension(name,desc) class name as "desc" << (D,Orange) >>
+!define Fact(name,desc) class name as "desc" << (F,Yellow) >>
+
+Table(Rides, "Rides") {
+  + distance
+  + duration
+  + start_time
+  + end_time
+  + subscription_type_id
+  + lock_id
+  + user_id
+  + vehicle_id
+  + weather_id
+}
+
+Dimension(Date, "Date") {
+  + date
+  + day_of_week
+  + weekend_flag
+}
+
+Dimension(SubscriptionType, "Subscription Types") {
+  + id
+  + name
+}
+
+Dimension(Lock, "Locks") {
+  + id
+  + location
+}
+
+Dimension(User, "Users") {
+  + id
+  + place_of_residence
+}
+
+Dimension(Vehicle, "Vehicle") {
+  + id
+  + type
+}
+
+Dimension(Weather, "Weather") {
+  + id
+  + temperature
+  + precipitation
+  + wind_speed
+}
+
+Rides -- Date
+Rides -- SubscriptionType
+Rides -- Lock
+Rides -- User
+Rides -- Vehicle
+Rides -- Weather
+
+@enduml

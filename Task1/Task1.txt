@@ -1,0 +1,77 @@
+Sure, here is a possible star schema that could answer these questions:
+
+Fact Table: Rides
+
+ride_id (PK)
+start_time (datetime, FK to Time dimension)
+end_time (datetime, FK to Time dimension)
+duration (int)
+distance (float)
+fare (float)
+subscription_type_id (int, FK to Subscription Type dimension)
+bike_id (int, FK to Bike dimension)
+lock_id (int, FK to Lock dimension)
+start_station_id (int, FK to Station dimension)
+end_station_id (int, FK to Station dimension)
+user_id (int, FK to User dimension)
+weather_id (int, FK to Weather dimension)
+Dimension Tables:
+
+Time Dimension
+    time_id (PK)
+    hour (int)
+    minute (int)
+    second (int)
+    day_of_week (int)
+    is_weekend (boolean)
+
+Subscription Type Dimension
+    subscription_type_id (PK)
+    subscription_type_name (varchar)
+
+Bike Dimension
+    bike_id (PK)
+    manufacturer (varchar)
+    model (varchar)
+
+
+
+Lock Dimension
+    lock_id (PK)
+    lock_type (varchar)
+    station_id (int, FK to Station dimension)
+
+
+Station Dimension
+    station_id (PK)
+    station_name (varchar)
+    station_size (int)
+
+User Dimension
+    user_id (PK)
+    user_city (varchar)
+    user_state (varchar)
+Weather Dimension
+    weather_id (PK)
+    temperature (float)
+    wind_speed (float)
+    precipitation (float)
+Measures:
+    Number of rides
+    Distance traveled
+    Fare collected
+
+Analysis Questions:
+
+What are the busy times (on a daily basis) during the week compared to the weekend?
+    Analyze the number of rides and total distance traveled by hour, day of the week, and is_weekend attribute in the Time dimension.
+Do date parameters affect distance traveled?
+    Analyze the total distance traveled by date attribute in the Time dimension and compare it to other dimensions such as weather or subscription type.
+Does weather affect trips?
+    Analyze the number of rides and total distance traveled by weather attributes in the Weather dimension, such as temperature, wind speed, and precipitation.
+How does the place of residence of users affect bicycle use?
+    Analyze the number of rides and total distance traveled by user attributes in the User dimension, such as user_city and user_state.
+We want to predict which locks need preventive maintenance. See how often lock numbers are used relatively.
+    Analyze the number of rides and distance traveled by lock attributes in the Lock dimension, and identify which locks have the highest utilization rate.
+If a customer cancels their subscription, we want to be able to predict which stations will experience the most impact.xzf
+    Analyze the number of rides and distance traveled by station attributes in the Station dimension, and identify which stations have the highest utilization rate among customers who have canceled their subscription.

@@ -1,0 +1,74 @@
+@startuml class Diagram
+ 
+skinparam linetype ortho
+
+
+class Rides {
+    VehicleId <<FK>>
+    SubscriptionId <<FK>>
+    StartLockId <<FK>>
+    EndLockId <<FK>>
+    StationId <<FK>>
+    StartPoint
+    EndPoint
+    Distance
+    StartTime
+    EndTime
+    Duration
+    Weather
+}
+
+class Timestamp {
+    timestampId
+    date
+    time
+    dayOfTheWeek
+}
+
+class Weather {
+    temperature
+    precipitation
+    windSpeed
+}
+
+class Subscription {
+    SubscriptionId <<PK>>
+    ValidFrom
+    SubscriptionType
+    UserId
+    Gender
+    Address
+}
+
+class Vehicle {
+    VehicleId <<PK>>
+    SerialNumber
+    BikeTypeId
+    CityId
+    LastMaintenanceOn
+}
+
+class Lock {
+    LockId <<PK>>
+    StationLockNr
+}
+
+class Station {
+    StationId <<PK>>
+    Type
+    ZipCode
+    District
+    GPSCoord
+}
+
+Rides "0..*" -r- "1" Vehicle: \t\t\t
+Rides -- Timestamp
+Timestamp -- Weather
+Rides "0..*" -u-- "0..1" Lock
+Rides "0..*" -u-- "0..1" Lock
+Rides "0..*" --l-- "0..1" Subscription: \t\t\t
+Rides "0..*" --- "0..1" Station
+
+
+
+@enduml

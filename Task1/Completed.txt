@@ -1,0 +1,42 @@
+FACT TABLE: Rides
+
+    ride_id (primary key, available in velo source system)
+
+    bike_id (available in velo source system, foreign key to Bike dimension)
+    station_id (available in velo source system, foreign key to Station dimension)
+    user_id (available in velo source system, foreign key to User dimension)
+    ride_duration (calculated from start_time and end_time, in minutes)(additive measure)
+    ride_distance (calculated from start_station and end_station latitude and longitude, in kilometers)(additive measure)
+    lock_id (foreign key to Locks dimension)
+
+DIMENSION TABLE: Ride
+        ride_id (primary key, available in velo source system)
+        start_time (available in velo source system)
+        end_time (available in velo source system)
+        start_point (available in velo source system)
+        end_point (available in velo source system)
+
+DIMENSION TABLE: Bike
+
+    bike_id (primary key, available in velo source system)
+    bike_type (available in velo source system)
+
+DIMENSION TABLE: Station
+
+    station_id (primary key, available in velo source system)
+    station_name (available in velo source system)
+    station_latitude (available in velo source system)
+    station_longitude (available in velo source system)
+
+DIMENSION TABLE: User
+
+    user_id (primary key, available in velo source system)
+    user_type (available in velo source system)
+    gender (not available in velo source system)
+
+
+DIMENSION TABLE: Lock
+        lock_id (primary key, available in velo source system)
+        lock_name (available in velo source system)
+        lock_latitude (available in velo source system)
+        lock_longitude (available in velo source system)
