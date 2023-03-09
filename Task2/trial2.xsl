@@ -22,14 +22,11 @@
 		<xsl:variable name="latitude" select="substring-before(Point/coordinates, ',')"/>
 		<xsl:variable name="longitude" select="substring-after(Point/coordinates, ',')"/>
 		<xsl:variable name="gpsCoord" select="concat('POINT(', $latitude, ' ', $longitude, ')')"/>
-
-
 		<xsl:variable name="objectType" select="ExtendedData/SchemaData/SimpleData[@name='Objecttype']"/>
 
 
 		<xsl:text>Insert Into Stations2(StationId, ObjectId, StationNr, Type, Street, Number, ZipCode, District, GPSCoord, AdditionalInfo) VALUES (</xsl:text>
 		<xsl:text>'</xsl:text>
-
 		<!-- counter that increments every time a new line is started -->
 		<xsl:variable name="counter" select="count(preceding-sibling::Placemark) + 1 - 2"/>
 		<xsl:value-of select="$counter"/>
