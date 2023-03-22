@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
+  <TalendMetadata:DatabaseConnection xmi:id="_orD8kL29Ee23d-h-15bjAQ" name="Velo_DWH" id="_hNA2oL29Ee23d-h-15bjAQ" label="Velo_DWH" dataPackage="_1bcfkMMzEe22b4KSjiYkEQ" DatabaseType="Microsoft SQL Server" DriverClass="net.sourceforge.jtds.jdbc.Driver" URL="jdbc:jtds:sqlserver://localhost:1433/Velo_DWH;" dbVersionString="JTDS" Port="1433" Username="SA" Password="enc:system.encryption.key.v1:pbVLJQbb5enG43Py5e1dsQhJhJlhV+NbtgRIvehP9pQKBcQCSWj2" ServerName="localhost" DatasourceName="" FileFieldName="" SID="Velo_DWH" SqlSynthax="" StringQuote="" NullChar="" DbmsId="id_MSSQL" ProductId="SQL_SERVER" AdditionalParams="" StandardSQL="true" SQLMode="false" UiSchema="dbo">
+    <taggedValue xmi:id="_orFKsL29Ee23d-h-15bjAQ" tag="Is Conn Need Reload" value="false"/>
+    <taggedValue xmi:id="_osp4AL29Ee23d-h-15bjAQ" tag="package filter" value=""/>
+    <taggedValue xmi:id="_oswlsL29Ee23d-h-15bjAQ" tag="Status" value=""/>
+    <taggedValue xmi:id="_oswlsb29Ee23d-h-15bjAQ" tag="Version" value="0.1"/>
+    <taggedValue xmi:id="_oswlsr29Ee23d-h-15bjAQ" tag="Purpose" value=""/>
+    <taggedValue xmi:id="_oswls729Ee23d-h-15bjAQ" tag="Description" value=""/>
+    <taggedValue xmi:id="_oswltL29Ee23d-h-15bjAQ" tag="Author" value=""/>
+    <taggedValue xmi:id="_oswltb29Ee23d-h-15bjAQ" tag="otherParameter"/>
+    <taggedValue xmi:id="_otEHsL29Ee23d-h-15bjAQ" tag="DB ProductName" value="Microsoft SQL Server"/>
+    <taggedValue xmi:id="_otEHsb29Ee23d-h-15bjAQ" tag="DB ProductVersion" value="15.00.4261"/>
+    <taggedValue xmi:id="_otEHsr29Ee23d-h-15bjAQ" tag="DB IdentifierQuoteString" value="&quot;"/>
+    <parameters xmi:id="_orFKsb29Ee23d-h-15bjAQ" key="CONN_PARA_KEY_USERNAME" value="SA"/>
+    <parameters xmi:id="_z-1-sMMzEe22b4KSjiYkEQ" key="CONN_PARA_KEY_MAPRDB_TABLE_NS_MAPPING" value=""/>
+  </TalendMetadata:DatabaseConnection>
+  <orgomg.cwm.resource.relational:Catalog xmi:id="_1bcfkMMzEe22b4KSjiYkEQ" name="Velo_DWH" dataManager="_orD8kL29Ee23d-h-15bjAQ">
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:Schema" xmi:id="_1bcfkcMzEe22b4KSjiYkEQ" name="dbo"/>
+  </orgomg.cwm.resource.relational:Catalog>
+</xmi:XMI>
