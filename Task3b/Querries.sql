@@ -17,10 +17,25 @@ ORDER BY CASE WHEN DayOfWeek IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END, DayOfW
 
 
 -- Question2: Do date parameters affect distance traveled?
--- not sure how to do this one
--- SELECT AVG(DISTANCE_MV) AS AvgDistance
--- FROM Fact_velo
--- WHERE DATE_SK BETWEEN [Start_Date] AND [End Date];
+-- average distance traveled on each day
+SELECT DATE_SK, AVG(DISTANCE_MV) AS AvgDistance
+FROM Fact_velo
+GROUP BY DATE_SK
+ORDER BY DATE_SK;
+
+-- average distance traveled by month
+SELECT DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK))) AS Month, AVG(DISTANCE_MV) AS AvgDistance
+FROM Fact_velo
+GROUP BY DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)))
+ORDER BY DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)));
+
+-- average distance traveled by year
+SELECT DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK))) AS Year, AVG(DISTANCE_MV) AS AvgDistance
+FROM Fact_velo
+GROUP BY DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)))
+ORDER BY DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)));
+
+
 
 
 
