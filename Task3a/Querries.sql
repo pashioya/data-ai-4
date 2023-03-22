@@ -1,5 +1,5 @@
 -- creating dim customer table
-drop table dim_Customer;
+drop table if exists dim_Customer;
 CREATE TABLE dim_Customer (
             SubscriptionId INT,
             ValidFrom DATE,
@@ -14,11 +14,11 @@ CREATE TABLE dim_Customer (
             SCD_End DATE,
             SCD_VERSION INT,
             SCD_ACTIVE VARCHAR(255),
-            CUSTOMER_SK int identity(1,1) not null,
+            CUSTOMER_SK int identity(1,1) not null
 );
 
 -- creating dim locks table
-drop table dim_locks;
+drop table if exists  dim_locks;
 create table dim_locks(
             LOCKID smallint not null ,
             STATIONLOCKNR tinyint not null ,
@@ -26,7 +26,7 @@ create table dim_locks(
             TYPE nvarchar(20) not null ,
             ZIPCODE nvarchar(20) not null ,
             DISTRICT nvarchar(100) not null,
-            LOCK_SK int identity(1,1) not null,
+            LOCK_SK int identity(1,1) not null
 );
 
 
