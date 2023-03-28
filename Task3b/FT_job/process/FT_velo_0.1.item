@@ -43,7 +43,7 @@
     <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
     <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
     <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
-    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" value="enc:system.encryption.key.v1:Zb6H6PPtsWs2UJ+E/iXujpujuJq64st98WdIJF1U" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" value="enc:system.encryption.key.v1:3L9wTd69R5NYNom53ppm+eZIurEI0AYgk8kmAgUI" show="false"/>
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
@@ -78,7 +78,7 @@
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;" show="false"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;" show="false"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:L1/iZlhlM59bVLCO2fQCJDxGijvE98xzHgpOnCA4" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:l4Vp8fKOoawM18NLJOqDKXps5G/jbnFT5+x9r2Qn" show="false"/>
     <elementParameter field="FILE" name="DBFILE" value="&quot;&quot;" show="false"/>
     <elementParameter field="DBTABLE" name="TABLE_STATS" value="&quot;&quot;" show="false"/>
     <elementParameter field="DBTABLE" name="TABLE_LOGS" value="&quot;&quot;" show="false"/>
@@ -118,7 +118,7 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:CtbMvLbWEmgCqgAXZhWGjtvsdcSo2kFlYipPgARmIWSv9iga4kq8Qd8="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:dHQAqKVMqYOwm30ze4e5Ai8OlefanHBTD6g4iQZ8QNY81c3Nf6GSMWI="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;Rides&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
@@ -262,13 +262,13 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:jBCoV7ZoD/3Uc17I+QEt1T/0G2g3NEn2cf9BGkgdK40qNXDgHRm0hwI="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;dim_day&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:Clyr5YZPJ5McA+2eKIxskAd2pm+G6ViBthDysbMEMaWI9nsb/FZ4mK0="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;dim_date&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT dbo.dim_day.DATE,&#xA;&#x9;&#x9;dbo.dim_day.DATE_SK,&#xA;&#x9;&#x9;dbo.dim_day.\&quot;MONTH\&quot;,&#xA;&#x9;&#x9;dbo.dim_day.\&quot;YEAR\&quot;,&#xA;&#x9;&#x9;dbo.dim_day.WEEK,&#xA;&#x9;&#x9;dbo.dim_day.HOURS,&#xA;&#x9;&#x9;dbo.dim_day.MINUTES,&#xA;&#x9;&#x9;dbo.dim_day.SECONDS&#xA;FROM&#x9;dbo.dim_day&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT dbo.dim_date.DATE,&#xA;&#x9;&#x9;dbo.dim_date.DATE_SK,&#xA;&#x9;&#x9;dbo.dim_date.\&quot;MONTH\&quot;,&#xA;&#x9;&#x9;dbo.dim_date.\&quot;YEAR\&quot;,&#xA;&#x9;&#x9;dbo.dim_date.WEEK,&#xA;&#x9;&#x9;dbo.dim_date.HOURS,&#xA;&#x9;&#x9;dbo.dim_date.MINUTES,&#xA;&#x9;&#x9;dbo.dim_date.SECONDS&#xA;FROM&#x9;dbo.dim_date&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -322,7 +322,7 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL" show="false"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:ndbQj7virQZ9McNqqvPw5vDTPTv05ouF26GttutxDbsmoJ+CxDCSs2w="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:T8ssBHkPryYUp81n9CXhY4kx0YDBkrNInUoG8YKZ7UivtK4Y0e1525k="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;Fact_velo&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="DROP_IF_EXISTS_AND_CREATE"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="true"/>
@@ -431,7 +431,7 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:tre+GTog9+y3vSAt5p7WoLiW8kR3kUztrugeXx11k5koTCaUT467Opg="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:L5te14nnjIPjpiVQrsWW8t3UNOzWS3ZEJnCl8vKp9fVN4H5kI6wrXes="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;dim_locks&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
@@ -470,7 +470,7 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:Oq7IWd2yV8/nF7J5SOON8yLJqd8q5EJacLNDu9bQHcQp6iGa+51mc8s="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:R77Bd+fFTf4HqfMzeL7vgErM1PmV0rwQIjRqjHzlZeETADgV/npR4+k="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;dim_Customer&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
@@ -509,7 +509,7 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:JNV/HC2nMG3KF2Itm5900YNIKChdlBQMfMS4aOHaK2R9fOkusAd+Ki4="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:UyMjAc+9/yVD5CM3F1bGTDHC724/Aie5h4Zh+n7bZjqiMew85BAlYBM="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;history&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
@@ -551,7 +551,7 @@
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;dbo&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;Velo_DWH&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;SA&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:8FmeWPYZ3rwcyvsYtR+LQWWTRylZae58EeUUt0D78kw5BtqwQkd6tpw="/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:AX9UNsvASFcSi7KKaKDA5Bge45DoZNA2kTOB/eLa13vaOkmQNyRdZVQ="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;dim_locks&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
