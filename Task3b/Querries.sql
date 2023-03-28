@@ -1,19 +1,13 @@
 
 -- Question 1: What are the busy times (on a daily basis) during the week compared to the weekend?
 -- average duration of trips by day of week
-SELECT DayOfWeek,
+SELECT DATENAME(WEEKDAY, dim_date.DATE) AS DayOfWeek,
        AVG(DURATION_MV) AS AvgDuration,
        COUNT(RideId) AS RideCount
-FROM (
-         SELECT RideId,
-                DURATION_MV,
-                DATENAME(WEEKDAY, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK))) AS DayOfWeek
-         FROM Fact_velo
-     ) AS Subquery
-GROUP BY DayOfWeek
-ORDER BY CASE WHEN DayOfWeek IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END, DayOfWeek;
-
-
+FROM Fact_velo
+         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
+GROUP BY DATENAME(WEEKDAY, dim_date.DATE)
+ORDER BY IIF(DATENAME(WEEKDAY, dim_date.DATE) IN ('Saturday', 'Sunday'), 1, 0), DATENAME(WEEKDAY, dim_date.DATE);
 
 
 -- Question2: Do date parameters affect distance traveled?
@@ -24,20 +18,19 @@ GROUP BY DATE_SK
 ORDER BY DATE_SK;
 
 -- average distance traveled by month
-SELECT DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK))) AS Month, AVG(DISTANCE_MV) AS AvgDistance
+SELECT DATEPART(MONTH, dim_date.date) AS Month, AVG(DISTANCE_MV) AS AvgDistance
 FROM Fact_velo
-GROUP BY DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)))
-ORDER BY DATEPART(MONTH, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)));
+         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
+GROUP BY DATEPART(MONTH, dim_date.date)
+ORDER BY DATEPART(MONTH, dim_date.date);
+
 
 -- average distance traveled by year
-SELECT DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK))) AS Year, AVG(DISTANCE_MV) AS AvgDistance
+SELECT DATEPART(YEAR, dim_date.date) AS Year, AVG(DISTANCE_MV) AS AvgDistance
 FROM Fact_velo
-GROUP BY DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)))
-ORDER BY DATEPART(YEAR, CONVERT(DATE, CONVERT(VARCHAR(8), DATE_SK)));
-
-
-
-
+         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
+GROUP BY DATEPART(YEAR, dim_date.date)
+ORDER BY DATEPART(YEAR, dim_date.date);
 
 
 -- Question 3: --Does weather affect trips?
@@ -78,7 +71,6 @@ GROUP BY dim_Customer.City;
 
 
 
-
 -- Question 5: We want to predict which locks need preventive maintenance. See how often lock numbers are used relatively.
 
 -- number of trips that start at each lock.  the ones with the most trips are the ones that need more maintenance
@@ -99,7 +91,6 @@ ORDER BY NumTrips DESC;
 
 
 
-
 -- Question 6: How does the type of subscription affect the number of rides?
 SELECT dim_Customer.SubscriptionType, COUNT(*) AS NumRides
 FROM Fact_velo
@@ -110,16 +101,12 @@ GROUP BY dim_Customer.SubscriptionType;
 
 
 
-
--- Question 7: How does the length of a trip affect the distance traveled?
--- the higher the duration the higher the distance traveled on average
-SELECT DURATION_MV, round(AVG(DISTANCE_MV),0) AS AvgDistance
+-- Question 7: How does the gender of the user affect the duration of the trip?
+-- males tend to have longer trips
+SELECT Gender, AVG(DURATION_MV) AS AvgDuration
 FROM Fact_velo
-where DURATION_MV > 0
-GROUP BY DURATION_MV
-ORDER BY DURATION_MV;
-
-
+         JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
+GROUP BY Gender;
 
 
 
@@ -136,16 +123,12 @@ ORDER BY NumTrips DESC;
 
 
 
-
-
-
 -- Question 9: How does lock type affect the number of trips that start at the lock?
 SELECT dim_locks.TYPE, COUNT(*) AS NumTrips
 FROM Fact_velo
          JOIN dim_locks ON Fact_velo.Startlockid = dim_locks.LOCKID
 GROUP BY dim_locks.TYPE
 ORDER BY NumTrips DESC;
-
 
 
 
