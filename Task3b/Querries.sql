@@ -131,6 +131,42 @@ GROUP BY dim_locks.TYPE
 ORDER BY NumTrips DESC;
 
 
+-- get all the data for ride with id 2616520
+SELECT
+    f.RideId,
+    c.SubscriptionId,
+    c.ValidFrom,
+    c.SubscriptionType,
+    c.UserId,
+    c.Gender,
+    c.Street,
+    c.Number,
+    c.City,
+    c.ZipCode,
+    d.DATE,
+    d.DAY_OF_MONTH,
+    d.MONTH,
+    d.YEAR,
+    d.WEEK,
+    d.WEEKDAY,
+    d.DAY_OF_WEEK,
+    d.DAY_OF_YEAR,
+    d.HOURS,
+    d.MINUTES,
+    d.SECONDS,
+    l1.LOCKID AS StartLockId,
+    l2.LOCKID AS EndLockId,
+    f.DURATION_MV,
+    f.DISTANCE_MV,
+    w.WEATHER_TYPE
+FROM dbo.Fact_velo f
+         JOIN dbo.dim_Customer c ON f.DIM_CUSTOMER_SUBSCRIPTION_SK = c.CUSTOMER_SK
+         JOIN dbo.dim_day d ON f.DATE_SK = d.DATE_SK
+         JOIN dbo.dim_locks l1 ON f.Startlockid = l1.LOCKID
+         JOIN dbo.dim_locks l2 ON f.EndLockId = l2.LOCKID
+            JOIN dbo.dim_weather w ON f.WEATHER_SK = w.WEATHER_SK
+WHERE f.RideId = 3033513;
+
 
 
 

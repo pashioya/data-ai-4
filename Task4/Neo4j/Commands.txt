@@ -1,0 +1,49 @@
+LOAD CSV FROM "file:///Journeys.csv" AS journey
+WITH journey
+CREATE (:Journey {
+    RideId: journey[0],
+    StartTime: datetime({epochMillis: apoc.date.parse(toString(journey[1]), 'ms', 'yyyy-MM-dd HH:mm:ss.SSS')}),
+    EndTime: datetime({epochMillis: apoc.date.parse(toString(journey[2]), 'ms', 'yyyy-MM-dd HH:mm:ss.SSS')}),
+    VehicleId: journey[3],
+    SubscriptionId: journey[4],
+    SubscriptionType: journey[5],
+    StartStationNR: journey[6],
+    StartStationLockNr: journey[7],
+    EndStationNR: journey[8],
+    EndStationLockNr: journey[9]
+})
+
+
+LOAD CSV FROM "file:///Stations.csv" AS station
+WITH station
+CREATE (:Station {
+    StationId: station[0],
+    StationNr: station[1],
+    Type: station[2],
+    Street: station[3],
+    StreetNumber: station[4],
+    ZipCode: station[5],
+    NeighborhoodId: station[6]
+})
+
+LOAD CSV FROM "file:///Neighborhoods.csv" AS neighborhood
+WITH neighborhood
+CREATE (:Neighborhood {
+    NeighborhoodId: neighborhood[0],
+    Name: neighborhood[0]
+})
+
+
+MATCH (n:Neighborhood), (s:Station)
+WHERE n.NeighborhoodId = s.NeighborhoodId
+CREATE (n)-[:HAS_STATION]->(s)
+
+
+MATCH (s:Station), (j:Journey)
+WHERE s.StationNr = j.StartStationNR
+CREATE (j)-[:STARTS_FROM]->(s)
+
+MATCH (s:Station), (j:Journey)
+WHERE s.StationNr = j.EndStationNR
+CREATE (j)-[:ENDS_AT]->(s)
+
