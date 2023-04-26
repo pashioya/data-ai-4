@@ -30,7 +30,7 @@ LOAD CSV FROM "file:///Neighborhoods.csv" AS neighborhood
 WITH neighborhood
 CREATE (:Neighborhood {
     NeighborhoodId: neighborhood[0],
-    Name: neighborhood[0]
+    Name: neighborhood[1]
 })
 
 
@@ -47,3 +47,31 @@ MATCH (s:Station), (j:Journey)
 WHERE s.StationNr = j.EndStationNR
 CREATE (j)-[:ENDS_AT]->(s)
 
+
+QUERIES:
+Getting a Specific station and hour of the day and the journeys that interacted with that station at that hour
+
+MATCH (s:Station)-[r]-(j:Journey)
+Where j.StartTime.hour = 12
+And s.StationNr = '089'
+RETURN s, r, j
+
+
+
+For a given station and hour, the journeys that started at that station and ended at another station.
+Gives the start neighbourhood and end neighbourhood as well as journey count
+
+ENTER START STATION AND HOUR BEFORE RUNNING QUERY
+
+TEST PURPOSES:
+START STATION = 089
+HOUR = 12
+(THESE ENTRYS GIVE RESULTS)
+
+MATCH(start:Station {StationNr: 'ENTER START STATION HERE'})-[:STARTS_FROM]-(journey:Journey)
+WHERE journey.StartTime.hour = ENTER HOUR HERE
+With start, journey
+Match  (n:Neighborhood)-[:HAS_STATION]->(start)
+Match (end:Station {StationNr: journey.EndStationNR})
+Match (nt:Neighborhood)-[:HAS_STATION]->(end)
+RETURN  n.Name as StartNeighborhood, nt.Name as EndNeighborhood, Count(journey) as JourneyCount

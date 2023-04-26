@@ -1,0 +1,7 @@
+
+1. Installed Neo4j
+2. Exported data from velo database from the day 13/06/2019 as csv
+3. Created a new database called "velo" in Neo4j
+4. Imported the 3 csv files into Neo4j
+5. Used the commands in the file "Commands.txt" to import the data into Neo4j
+6. Created queries to answer the questions.
