@@ -4,4 +4,6 @@
 3. Created a new database called "velo" in Neo4j
 4. Imported the 3 csv files into Neo4j
 5. Used the commands in the file "Commands.txt" to import the data into Neo4j
+    - Important* run them one by one
 6. Created queries to answer the questions.
+    - can be found in the file "commands.txt". on the last section
