@@ -35,3 +35,4 @@ FROM Rides
 WHERE CONVERT(date, StartTime) = '2019-06-13';
 
 
+
