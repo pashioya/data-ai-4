@@ -123,12 +123,12 @@ ORDER BY NumTrips DESC;
 
 
 
--- Question 9: How does lock type affect the number of trips that start at the lock?
-SELECT dim_locks.TYPE, COUNT(*) AS NumTrips
-FROM Fact_velo
-         JOIN dim_locks ON Fact_velo.Startlockid = dim_locks.LOCKID
-GROUP BY dim_locks.TYPE
-ORDER BY NumTrips DESC;
+-- QUESTION 9: HOW DOES LOCK TYPE AFFECT THE NUMBER OF TRIPS THAT START AT THE LOCK?
+SELECT DIM_LOCKS.TYPE, COUNT(*) AS NUMTRIPS
+FROM FACT_VELO
+         JOIN DIM_LOCKS ON FACT_VELO.STARTLOCKID = DIM_LOCKS.LOCKID
+GROUP BY DIM_LOCKS.TYPE
+ORDER BY NUMTRIPS DESC;
 
 
 -- get all the data for ride with id 2616520
@@ -161,7 +161,7 @@ SELECT
     w.WEATHER_TYPE
 FROM dbo.Fact_velo f
          JOIN dbo.dim_Customer c ON f.DIM_CUSTOMER_SUBSCRIPTION_SK = c.CUSTOMER_SK
-         JOIN dbo.dim_day d ON f.DATE_SK = d.DATE_SK
+         JOIN dbo.dim_date d ON f.DATE_SK = d.DATE_SK
          JOIN dbo.dim_locks l1 ON f.Startlockid = l1.LOCKID
          JOIN dbo.dim_locks l2 ON f.EndLockId = l2.LOCKID
             JOIN dbo.dim_weather w ON f.WEATHER_SK = w.WEATHER_SK
