@@ -1,17 +1,19 @@
-Optimization Document
+# Optimization Document
 
-Query to Optimize:
+## Query to Optimize:
+```sql
 SELECT dim_Customer.SubscriptionType, COUNT(*) AS NumRides
 FROM Fact_velo
          JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
 GROUP BY dim_Customer.SubscriptionType;
+```
 
-Reasons for selecting the query:
+## Reasons for selecting the query:
 The query is selected because it is a common query that is executed by the business users.
 The query requires a full lookup of the Fact_velo table, which contains a large volume of data.
 The query involves a join operation between the Fact_velo and dim_Customer tables.
 
-Execution Plan Before Optimization:
+## Execution Plan Before Optimization:
 The execution plan shows a join operation between the Fact_velo and dim_Customer tables,
 followed by a group by operation on the SubscriptionType column.
 The join operation is performed using the DIM_CUSTOMER_SUBSCRIPTION_SK column
@@ -22,9 +24,9 @@ Total Cost: 19.3694
 
 
 
-Optimization Plan (Column Store):
+##  Optimization Plan (Column Store):
 We have two column store options for optimization:
-1. Clustered Column Store Index
+### Clustered Column Store Index
 
 We can create a clustered column store index on the Fact_velo table.
 Problem with Clustered Column Store Index:
@@ -33,13 +35,16 @@ It stores the entire table in a columnar format.
 This means that all columns in the table are stored in a columnar format.
 This is not ideal for the Fact_velo table because it contains many columns that are not used in the query.
 
---Queries to create Clustered Column Store Index
-    - CREATE CLUSTERED COLUMNSTORE INDEX full_table_col_store_index ON Fact_velo;
---Query to drop Clustered Column Store Index
-    -  DROP INDEX full_table_col_store_index ON Fact_velo;
+####  Queries to create Clustered Column Store Index
+```sql
+CREATE CLUSTERED COLUMNSTORE INDEX full_table_col_store_index ON Fact_velo;
+```
+####  Query to drop Clustered Column Store Index
+```sql
+DROP INDEX full_table_col_store_index ON Fact_velo;
+```
 
-
-2. Non-Clustered Column Store Index
+### Non-Clustered Column Store Index
 
 We can create a column store index on the DIM_CUSTOMER_SUBSCRIPTION_SK column in the Fact_velo table.
 This is a non-clustered column store index.
@@ -47,21 +52,26 @@ It stores only the DIM_CUSTOMER_SUBSCRIPTION_SK column in a columnar format.
 This is ideal for the Fact_velo table because the DIM_CUSTOMER_SUBSCRIPTION_SK column is used in the join operation.
 The column store index is created on the DIM_CUSTOMER_SUBSCRIPTION_SK column.
 
--- Query to create Column Store Index on a specific column
+#### Query to create Column Store Index on a specific column
+
+```sql
 CREATE COLUMNSTORE INDEX
     [Fact_velo_CCI]
 ON [dbo].[Fact_velo]
 (
     [DIM_CUSTOMER_SUBSCRIPTION_SK]
 )
-
+```
 -- Query to drop Column Store Index on a specific column
+```sql
 DROP INDEX [Fact_velo_CCI] ON [dbo].[Fact_velo]
+```
 
-
-Execution Plan After Optimization:
+## Execution Plan After Optimization:
 Before we test the execution plan after optimization, We cleared the cache using the following query:
+```sql
 DBCC FREEPROCCACHE;
+```
 This allows us to test the execution plan without any bias.
 
 The execution plan now takes advantage of column storage.
@@ -72,7 +82,7 @@ Total Cost: 3.5807
 
 
 
-Comparison of Before and After Execution Plan:
+## Comparison of Before and After Execution Plan:
 Before Optimization:
 Table scan on the Fact_velo table
 Join operation using the necessary columns (DIM_CUSTOMER_SUBSCRIPTION_SK)
