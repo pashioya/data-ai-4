@@ -1,126 +1,112 @@
 
 -- Question 1: What are the busy times (on a daily basis) during the week compared to the weekend?
 -- average duration of trips by day of week
-SELECT DATENAME(WEEKDAY, dim_date.DATE) AS DayOfWeek,
-       AVG(DURATION_MV) AS AvgDuration,
-       COUNT(RideId) AS RideCount
-FROM Fact_velo
-         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
-GROUP BY DATENAME(WEEKDAY, dim_date.DATE)
-ORDER BY IIF(DATENAME(WEEKDAY, dim_date.DATE) IN ('Saturday', 'Sunday'), 1, 0), DATENAME(WEEKDAY, dim_date.DATE);
-
+SELECT DATENAME(WEEKDAY, DIM_DATE.DATE) AS DAYOFWEEK,
+       AVG(DURATION_MV)                 AS AVGDURATION,
+       COUNT(RIDEID)                    AS RIDECOUNT
+FROM FACT_VELO
+         JOIN DIM_DATE ON FACT_VELO.DATE_SK = DIM_DATE.DATE_SK
+GROUP BY DATENAME(WEEKDAY, DIM_DATE.DATE)
+ORDER BY IIF(DATENAME(WEEKDAY, DIM_DATE.DATE) IN ('Saturday', 'Sunday'), 1, 0), DATENAME(WEEKDAY, DIM_DATE.DATE);
 
 -- Question2: Do date parameters affect distance traveled?
 -- average distance traveled on each day
-SELECT DATE_SK, AVG(DISTANCE_MV) AS AvgDistance
-FROM Fact_velo
+SELECT DATE_SK, AVG(DISTANCE_MV) AS AVGDISTANCE
+FROM FACT_VELO
 GROUP BY DATE_SK
 ORDER BY DATE_SK;
 
 -- average distance traveled by month
-SELECT DATEPART(MONTH, dim_date.date) AS Month, AVG(DISTANCE_MV) AS AvgDistance
-FROM Fact_velo
-         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
-GROUP BY DATEPART(MONTH, dim_date.date)
-ORDER BY DATEPART(MONTH, dim_date.date);
-
+SELECT DATEPART(MONTH, DIM_DATE.DATE) AS MONTH, AVG(DISTANCE_MV) AS AVGDISTANCE
+FROM FACT_VELO
+         JOIN DIM_DATE ON FACT_VELO.DATE_SK = DIM_DATE.DATE_SK
+GROUP BY DATEPART(MONTH, DIM_DATE.DATE)
+ORDER BY DATEPART(MONTH, DIM_DATE.DATE);
 
 -- average distance traveled by year
-SELECT DATEPART(YEAR, dim_date.date) AS Year, AVG(DISTANCE_MV) AS AvgDistance
-FROM Fact_velo
-         JOIN dim_date ON Fact_velo.DATE_SK = dim_date.date_sk
-GROUP BY DATEPART(YEAR, dim_date.date)
-ORDER BY DATEPART(YEAR, dim_date.date);
+SELECT DATEPART(YEAR, DIM_DATE.DATE) AS YEAR, AVG(DISTANCE_MV) AS AVGDISTANCE
+FROM FACT_VELO
+         JOIN DIM_DATE ON FACT_VELO.DATE_SK = DIM_DATE.DATE_SK
+GROUP BY DATEPART(YEAR, DIM_DATE.DATE)
+ORDER BY DATEPART(YEAR, DIM_DATE.DATE);
 
 
 -- Question 3: --Does weather affect trips?
 
 -- average duration of trips by weather type
 
-SELECT dim_weather.WEATHER_TYPE, AVG(Fact_velo.DURATION_MV) AS AvgDuration
-FROM Fact_velo
-         JOIN dim_weather ON Fact_velo.WEATHER_SK = dim_weather.WEATHER_SK
-GROUP BY dim_weather.WEATHER_TYPE;
+SELECT DIM_WEATHER.WEATHER_TYPE, AVG(FACT_VELO.DURATION_MV) AS AVGDURATION, COUNT(*) AS NUMBEROFTRIPS
+FROM FACT_VELO
+         JOIN DIM_WEATHER ON FACT_VELO.WEATHER_SK = DIM_WEATHER.WEATHER_SK
+GROUP BY DIM_WEATHER.WEATHER_TYPE;
+
 
 -- Number of trips by weather type
 
-SELECT dim_weather.WEATHER_TYPE, count(*) AS NumberOfTrips
-FROM Fact_velo
-         JOIN dim_weather ON Fact_velo.WEATHER_SK = dim_weather.WEATHER_SK
-GROUP BY dim_weather.WEATHER_TYPE;
-
-
+SELECT DIM_WEATHER.WEATHER_TYPE, COUNT(*) AS NUMBEROFTRIPS
+FROM FACT_VELO
+         JOIN DIM_WEATHER ON FACT_VELO.WEATHER_SK = DIM_WEATHER.WEATHER_SK
+GROUP BY DIM_WEATHER.WEATHER_TYPE;
 
 
 
 -- Question 4: How does the place of residence of users affect bicycle use?
 
 -- Number of trips by city
-SELECT dim_Customer.City, COUNT(*) AS NumberOfTrips
-FROM Fact_velo
-         JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
-GROUP BY dim_Customer.City;
+SELECT DIM_CUSTOMER.CITY, COUNT(*) AS NUMBEROFTRIPS
+FROM FACT_VELO
+         JOIN DIM_CUSTOMER ON FACT_VELO.DIM_CUSTOMER_SUBSCRIPTION_SK = DIM_CUSTOMER.CUSTOMER_SK
+GROUP BY DIM_CUSTOMER.CITY;
 
 -- Average duration of trips by city
-SELECT dim_Customer.City, AVG(Fact_velo.DURATION_MV) AS AvgDuration
-FROM Fact_velo
-         JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
-GROUP BY dim_Customer.City;
-
-
+SELECT DIM_CUSTOMER.CITY, AVG(FACT_VELO.DURATION_MV) AS AVGDURATION
+FROM FACT_VELO
+         JOIN DIM_CUSTOMER ON FACT_VELO.DIM_CUSTOMER_SUBSCRIPTION_SK = DIM_CUSTOMER.CUSTOMER_SK
+GROUP BY DIM_CUSTOMER.CITY;
 
 
 
 -- Question 5: We want to predict which locks need preventive maintenance. See how often lock numbers are used relatively.
 
 -- number of trips that start at each lock.  the ones with the most trips are the ones that need more maintenance
-SELECT dim_locks.LOCKID, COUNT(*) AS NumTrips
-FROM Fact_velo
-         JOIN dim_locks ON Fact_velo.Startlockid = dim_locks.LOCKID
-GROUP BY dim_locks.LOCKID
-ORDER BY NumTrips DESC;
+SELECT DIM_LOCKS.LOCKID, COUNT(*) AS NUMTRIPS
+FROM FACT_VELO
+         JOIN DIM_LOCKS ON FACT_VELO.STARTLOCKID = DIM_LOCKS.LOCKID
+GROUP BY DIM_LOCKS.LOCKID
+ORDER BY NUMTRIPS DESC;
 
 -- number of trips that end at each lock. the ones with the most trips are the ones that need more maintenance
-SELECT dim_locks.LOCKID, COUNT(*) AS NumTrips
-FROM Fact_velo
-         JOIN dim_locks ON Fact_velo.EndLockId = dim_locks.LOCKID
-GROUP BY dim_locks.LOCKID
-ORDER BY NumTrips DESC;
-
-
-
+SELECT DIM_LOCKS.LOCKID, COUNT(*) AS NUMTRIPS
+FROM FACT_VELO
+         JOIN DIM_LOCKS ON FACT_VELO.ENDLOCKID = DIM_LOCKS.LOCKID
+GROUP BY DIM_LOCKS.LOCKID
+ORDER BY NUMTRIPS DESC;
 
 
 -- Question 6: How does the type of subscription affect the number of rides?
-SELECT dim_Customer.SubscriptionType, COUNT(*) AS NumRides
-FROM Fact_velo
-         JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
-GROUP BY dim_Customer.SubscriptionType;
-
-
+SELECT DIM_CUSTOMER.SUBSCRIPTIONTYPE, COUNT(*) AS NUMRIDES
+FROM FACT_VELO
+         JOIN DIM_CUSTOMER ON FACT_VELO.DIM_CUSTOMER_SUBSCRIPTION_SK = DIM_CUSTOMER.CUSTOMER_SK
+GROUP BY DIM_CUSTOMER.SUBSCRIPTIONTYPE;
 
 
 
 -- Question 7: How does the gender of the user affect the duration of the trip?
 -- males tend to have longer trips
-SELECT Gender, AVG(DURATION_MV) AS AvgDuration
-FROM Fact_velo
-         JOIN dim_Customer ON Fact_velo.DIM_CUSTOMER_SUBSCRIPTION_SK = dim_Customer.CUSTOMER_SK
-GROUP BY Gender;
-
+SELECT GENDER, AVG(DURATION_MV) AS AVGDURATION
+FROM FACT_VELO
+         JOIN DIM_CUSTOMER ON FACT_VELO.DIM_CUSTOMER_SUBSCRIPTION_SK = DIM_CUSTOMER.CUSTOMER_SK
+GROUP BY GENDER;
 
 
 
 -- Question 8:  How does the station location affect the number of trips?
 -- the more trips that start at a station the more trips that end at that station
-SELECT dim_locks.LOCKID, COUNT(*) AS NumTrips
-FROM Fact_velo
-         JOIN dim_locks ON Fact_velo.Startlockid = dim_locks.LOCKID
-GROUP BY dim_locks.LOCKID
-ORDER BY NumTrips DESC;
-
-
-
+SELECT DIM_LOCKS.LOCKID, COUNT(*) AS NUMTRIPS
+FROM FACT_VELO
+         JOIN DIM_LOCKS ON FACT_VELO.STARTLOCKID = DIM_LOCKS.LOCKID
+GROUP BY DIM_LOCKS.LOCKID
+ORDER BY NUMTRIPS DESC;
 
 
 -- QUESTION 9: HOW DOES LOCK TYPE AFFECT THE NUMBER OF TRIPS THAT START AT THE LOCK?
