@@ -96,7 +96,7 @@ Group by operation on the SubscriptionType column
 Total Cost: 3.5807
 
 
-Decision:
+## Decision:
 Based on the collected information, implementing the column storage optimization is recommended,
 especially since the Fact_velo table contains a large volume of data.
 The script to enable column storage on the Fact_velo table is provided.
