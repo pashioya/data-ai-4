@@ -1,3 +1,11 @@
+--query that we want to optimize
+SELECT DIM_LOCKS.LOCKID, COUNT(*) AS NUMTRIPS
+FROM FACT_VELO
+         JOIN DIM_LOCKS ON FACT_VELO.STARTLOCKID = DIM_LOCKS.LOCKID
+GROUP BY DIM_LOCKS.LOCKID
+ORDER BY NUMTRIPS DESC;
+
+--set options for indexed views
 ALTER DATABASE VELO_DWH
     SET ANSI_NULLS ON,
     ANSI_PADDING ON,
@@ -8,6 +16,7 @@ ALTER DATABASE VELO_DWH
     QUOTED_IDENTIFIER ON,
     RECURSIVE_TRIGGERS OFF;
 
+--verify that the options are set correctly
 SELECT IS_ANSI_NULLS_ON,
        IS_ANSI_PADDING_ON,
        IS_ANSI_WARNINGS_ON,
@@ -19,6 +28,7 @@ SELECT IS_ANSI_NULLS_ON,
 FROM SYS.DATABASES
 WHERE NAME = 'velo_dwh';
 
+--create view of the query
 CREATE VIEW dbo.vw_materializedview
     WITH SCHEMABINDING
 AS
@@ -27,14 +37,20 @@ FROM dbo.FACT_VELO
          JOIN dbo.DIM_LOCKS ON dbo.FACT_VELO.STARTLOCKID = dbo.DIM_LOCKS.LOCKID
 GROUP BY dbo.DIM_LOCKS.LOCKID;
 
+--create clustered index for the view
 create unique clustered index lock_trips_cindex
 on dbo.VW_MATERIALIZEDVIEW(LOCKID);
 
+--try the same query again
 SELECT DIM_LOCKS.LOCKID, COUNT(*) AS NUMTRIPS
 FROM FACT_VELO
          JOIN DIM_LOCKS ON FACT_VELO.STARTLOCKID = DIM_LOCKS.LOCKID
 GROUP BY DIM_LOCKS.LOCKID
 ORDER BY NUMTRIPS DESC;
+
+
+--query without indexed view: total cost = 18.0907, time = ~120ms
+--query with indexed view   : total cost = 0.0772,  time = ~80ms
 
 
 
