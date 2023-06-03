@@ -65,21 +65,30 @@ Analysis Questions:
 
 What are the busy times (on a daily basis) during the week compared to the weekend?
     Analyze the number of rides and total distance traveled by hour, day of the week, and is_weekend attribute in the Time dimension.
+
 Do date parameters affect distance traveled?
     Analyze the total distance traveled by date attribute in the Time dimension and compare it to other dimensions such as weather or subscription type.
+
 Does weather affect trips?
     Analyze the number of rides and total distance traveled by weather attributes in the Weather dimension, such as temperature, wind speed, and precipitation.
+
 How does the place of residence of users affect bicycle use?
     Analyze the number of rides and total distance traveled by user attributes in the User dimension, such as user_city and user_state.
+
 We want to predict which locks need preventive maintenance. See how often lock numbers are used relatively.
     Analyze the number of rides and distance traveled by lock attributes in the Lock dimension, and identify which locks have the highest utilization rate.
+
 If a customer cancels their subscription, we want to be able to predict which stations will experience the most impact.xzf
     Analyze the number of rides and distance traveled by station attributes in the Station dimension, and identify which stations have the highest utilization rate among customers who have canceled their subscription.
+
 How does the type of subscription affect the number of rides?
     Analyze the number of rides and distance traveled by subscription type attributes in the Subscription Type dimension, and identify which subscription types have the highest utilization rate.
+
 How does the type of bike affect the number of rides?
     Analyze the number of rides and distance traveled by bike attributes in the Bike dimension, and identify which bike types have the highest utilization rate.
+
 How does the length of a trip affect the distance traveled?
     Analyze the number of rides and distance traveled by duration attribute in the Fact table, and identify which duration ranges have the highest utilization rate.
+
 What is the average distance traveled per ride?
     Analyze the average distance traveled per ride by date attribute in the Time dimension.
