@@ -92,3 +92,18 @@ How does the length of a trip affect the distance traveled?
 
 What is the average distance traveled per ride?
     Analyze the average distance traveled per ride by date attribute in the Time dimension.
+
+
+What is the average duration of rides for each subscription type?
+Which bike lot has the highest number of deliveries in the past month?
+How many rides were taken by customers of each gender on a specific date?
+Which station has the highest number of locks and what is the distribution of lock types at that station?
+What is the average distance traveled by customers in each subscription type on weekdays versus weekends?
+How many rides started and ended in each district during a specific month?
+Which weather conditions are associated with the longest rides on average?
+What is the most common bike type used by customers in each city?
+How does the number of rides vary based on the hour of the day and the day of the week?
+Which bike lots have experienced the most maintenance activities in the past quarter?
+
+
+

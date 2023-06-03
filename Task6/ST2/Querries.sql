@@ -25,4 +25,20 @@ GROUP BY BT.BikeTypeDescription
 
 
 -- Question 3:
+--     How many rides started and ended in each district during a specific month?
+SELECT
+    start_station.ZipCode,
+    DATENAME(MONTH, r.StartTime) AS StartMonth,
+    COUNT(DISTINCT r.RideId) AS RideCount,
+    'Belgium' AS Country
+FROM
+    dbo.Rides r
+        INNER JOIN dbo.Locks start_lock ON r.Startlockid = start_lock.LockId
+        INNER JOIN dbo.Locks end_lock ON r.EndLockId = end_lock.LockId
+        INNER JOIN dbo.Stations start_station ON start_lock.StationId = start_station.StationId
+        INNER JOIN dbo.Stations end_station ON end_lock.StationId = end_station.StationId
+GROUP BY
+    start_station.ZipCode,
+    DATENAME(MONTH, r.StartTime)
+
 
