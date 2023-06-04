@@ -1,4 +1,4 @@
--- Question 1: How does the zipcode affect the subscription type?
+-- Question 1: How do the subscription types spread depending on the zipcode and the period of time?
 SELECT c.ZipCode, 'Belgium' AS Country, c.SubscriptionType, COUNT(*) AS SubscriptionCount
 FROM dbo.Fact_velo f
          JOIN dbo.dim_Customer c ON f.DIM_CUSTOMER_SUBSCRIPTION_SK = c.SubscriptionId
