@@ -7,6 +7,10 @@ GROUP BY c.ZipCode, c.SubscriptionType
 -- Conclusion:
 -- Yearly subscriptions are dominant in every zip code
 -- however if filtered out we see that monthly are the next most popular in essentially every zip code
+-- Dashboard 1:
+-- You can choose the types of subscriptions you want to see
+-- you can see details of the zipcodes you want to see
+-- you can choose the months you want to see
 
 -- Question 2: How does the type of bike affect the number of rides?
 SELECT BT.BikeTypeDescription, COUNT(R.RideId) AS RideCount
@@ -16,12 +20,8 @@ FROM dbo.Rides R
          JOIN dbo.BikeTypes BT ON BL.BikeTypeId = BT.BikeTypeId
 GROUP BY BT.BikeTypeDescription
 
-SELECT BT.BikeTypeDescription, COUNT(R.RideId) AS RideCount, AVG(RideDistance) AS AverageDistance
-FROM dbo.Rides R
-         JOIN dbo.Vehicles V ON R.VehicleId = V.VehicleId
-         JOIN dbo.Bikelots BL ON V.BikeLotId = BL.BikeLotId
-         JOIN dbo.BikeTypes BT ON BL.BikeTypeId = BT.BikeTypeId
-GROUP BY BT.BikeTypeDescription
+-- you can see the graphs showing the number of rides for each type of bike
+-- you can see the graphs showing the average ride distance for each type of bike
 
 
 -- Question 3:
@@ -40,5 +40,9 @@ FROM
 GROUP BY
     start_station.ZipCode,
     DATENAME(MONTH, r.StartTime)
+
+-- Dashboard 2:
+-- You can choose the months you want to see
+-- You can see the visualisations of the number of rides for each district
 
 
