@@ -34,4 +34,4 @@ SELECT ZIPCODE, COUNT(LOCKID) FROM DIM_LOCKS WHERE LOCKID != 0 GROUP BY ZIPCODE;
 --         the size of the circles is the amount of trips per zipcode and the amount of locks is written as well as the zipcode
 --sheet 3: antwerp map with locks/trips for each zipcode
 
---Conclusion: Zones in very light blue need to install more locks around the zone
+--Conclusion: Zones in very light blue need to install more locks in that zone
