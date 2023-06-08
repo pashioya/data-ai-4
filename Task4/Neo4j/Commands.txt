@@ -63,13 +63,25 @@ Gives the start neighbourhood and end neighbourhood as well as journey count
 
 ENTER START STATION AND HOUR BEFORE RUNNING QUERY
 
+
+
+MATCH(start:Station {StationNr: 'ENTER START STATION HERE'})-[:STARTS_FROM]-(journey:Journey)
+WHERE journey.StartTime.hour = ENTER HOUR HERE
+With start, journey
+Match  (n:Neighborhood)-[:HAS_STATION]->(start)
+Match (end:Station {StationNr: journey.EndStationNR})
+Match (nt:Neighborhood)-[:HAS_STATION]->(end)
+RETURN  n.Name as StartNeighborhood, nt.Name as EndNeighborhood, Count(journey) as JourneyCount
+
+
+Example query:
 TEST PURPOSES:
 START STATION = 089
 HOUR = 12
 (THESE ENTRYS GIVE RESULTS)
 
-MATCH(start:Station {StationNr: 'ENTER START STATION HERE'})-[:STARTS_FROM]-(journey:Journey)
-WHERE journey.StartTime.hour = ENTER HOUR HERE
+MATCH(start:Station {StationNr: '089'})-[:STARTS_FROM]-(journey:Journey)
+WHERE journey.StartTime.hour = 12
 With start, journey
 Match  (n:Neighborhood)-[:HAS_STATION]->(start)
 Match (end:Station {StationNr: journey.EndStationNR})
