@@ -81,9 +81,20 @@ HOUR = 12
 (THESE ENTRYS GIVE RESULTS)
 
 MATCH(start:Station {StationNr: '089'})-[:STARTS_FROM]-(journey:Journey)
-WHERE journey.StartTime.hour = 12
 With start, journey
 Match  (n:Neighborhood)-[:HAS_STATION]->(start)
 Match (end:Station {StationNr: journey.EndStationNR})
 Match (nt:Neighborhood)-[:HAS_STATION]->(end)
 RETURN  n.Name as StartNeighborhood, nt.Name as EndNeighborhood, Count(journey) as JourneyCount
+
+
+All journeys that started at a given station and ended at another station.
+Ordered by journey count
+
+MATCH (start:Station {StationNr: '089'})-[:STARTS_FROM]-(journey:Journey)
+WITH start, journey
+MATCH (n:Neighborhood)-[:HAS_STATION]->(start)
+MATCH (end:Station {StationNr: journey.EndStationNR})
+MATCH (nt:Neighborhood)-[:HAS_STATION]->(end)
+RETURN n.Name as StartNeighborhood, nt.Name as EndNeighborhood, COUNT(journey) as JourneyCount
+ORDER BY JourneyCount DESC
